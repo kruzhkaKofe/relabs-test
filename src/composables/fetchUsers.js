@@ -11,7 +11,6 @@ export const fetchUsers = (getUsers) => {
     try {
       users.value = await getUsers();
     } catch (e) {
-      console.log(e);
       error.value = true;
     } finally {
       loading.value = false;
