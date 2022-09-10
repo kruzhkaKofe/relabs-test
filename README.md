@@ -1,4 +1,4 @@
 # Vue 3 + Vite + Element UI
 
 Тестовое задание.
-# https://deft-dieffenbachia-8cc51b.netlify.app/
+# https://heartfelt-snickerdoodle-4b70c3.netlify.app
