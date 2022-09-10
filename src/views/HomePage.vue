@@ -49,6 +49,7 @@ const { users, loading, error, loadUsers } = fetchUsers(async () => {
 
 const formatTime = (users) => {
   users.forEach((user) => {
+    user.ctime = user.ctime * 1000
     user.ctime = new Date(user.ctime).toLocaleString([], {
       dateStyle: "short",
       timeStyle: "short",
@@ -76,7 +77,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  SOCKET.addEventListener("message", loadEvents);
+  SOCKET.removeEventListener("message", loadEvents);
 });
 </script>
 

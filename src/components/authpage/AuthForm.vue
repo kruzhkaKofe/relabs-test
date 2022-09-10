@@ -1,7 +1,7 @@
 <template>
   <div class="auth__content">
     <el-form
-      @click.pervent
+      @click.prevent
       v-loading="loading"
       class="auth__form"
       ref="ruleFormRef"
@@ -16,7 +16,7 @@
         :rules="[
           {
             required: true,
-            message: 'Введите email',
+            message: 'Введите адрес',
             trigger: 'blur',
           },
           {
@@ -30,7 +30,7 @@
       </el-form-item>
 
       <el-form-item
-        label="Password"
+        label="Пароль"
         prop="pass"
         :rules="[
           {
@@ -45,9 +45,9 @@
 
       <el-form-item>
         <el-button type="primary" @click="submitForm(ruleFormRef)"
-          >Submit</el-button
+          >Войти</el-button
         >
-        <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+        <el-button @click="resetForm(ruleFormRef)">Сбросить</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -72,41 +72,17 @@ const ruleForm = ref({
   pass: "",
 });
 
-const validatePass = () => {
-  if (value === "") {
-    callback(new Error("Пожалуйста, введите пароль."));
-  } else {
-    if (ruleForm.pass !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("pass", () => null);
-    }
-    callback();
-  }
-};
-
-const validateEmail = () => {
-  if (value === "") {
-    callback(new Error("Пожалуйста, введите email."));
-  } else {
-    if (ruleForm.email !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("emai.", () => null);
-    }
-    callback();
-  }
-};
-
 const submitForm = (formEl) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
       emit("serverRequest");
     } else {
-      console.log("Ошибка!");
       return false;
     }
   });
 };
+
 const resetForm = (formEl) => {
   if (!formEl) return;
   formEl.resetFields();

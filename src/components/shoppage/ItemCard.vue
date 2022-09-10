@@ -1,31 +1,35 @@
 <template>
   <el-card class="card" :body-style="{ padding: '1rem' }" shadow="hover">
-    <div class="card__cover">
-      <el-image class="card__image" :src="item.image" :alt="item.description" />
-      <div class="card__view">
-        <el-button class="card__view-button">Быстрый просмотр</el-button>
+    <div class="cover">
+      <el-image
+        class="cover__image"
+        :src="item.image"
+        :alt="item.description"
+      />
+      <div class="cover__view">
+        <el-button class="cover__view-button">Быстрый просмотр</el-button>
       </div>
     </div>
-    <div class="card__info">
-      <div class="card__price">
-        <p class="card__sale">{{ item.sale }} Р</p>
-        <p class="card__fullprice">{{ item.fullprice }} Р</p>
+    <div class="info">
+      <div class="price">
+        <p class="price__sale">{{ item.sale }} Р</p>
+        <p class="price__fullprice">{{ item.fullprice }} Р</p>
       </div>
-      <div class="card__description">
+      <div class="info__description">
         {{ item.description }}
       </div>
       <el-rate
-        class="card__rate"
+        class="info__rate"
         v-model="value"
         disabled
         show-score
         text-color="#999999"
         score-template="87"
       />
-      <div class="card__credit">Рассрочка 0-0-6</div>
-      <div class="card__actions">
-        <el-button class="card__add-cart-button">В корзину</el-button>
-        <icon-like class="card__like-button" />
+      <div class="info__credit">Рассрочка 0-0-6</div>
+      <div class="actions">
+        <el-button class="actions__add-cart-button">В корзину</el-button>
+        <icon-like class="actions__like-button" />
       </div>
     </div>
   </el-card>
@@ -35,7 +39,7 @@
 import { ref } from "vue";
 import { IconLike } from "../icons/index.js";
 
-const value = ref(4);
+const value = ref(5);
 
 const props = defineProps({
   item: Object,
@@ -48,15 +52,19 @@ const props = defineProps({
   width: 25rem
   border-radius: $default
   font-size: 1.4rem
-  &__cover
-    position: relative
-    height: 25rem
-    &:hover .card__view
-      display: flex
-      align-items: center
-      justify-content: center
+
+.cover
+  position: relative
+  height: 25rem
+
+  &:hover .cover__view
+    display: flex
+    align-items: center
+    justify-content: center
+
   &__image
     height: 25rem
+
   &__view
     position: absolute
     top: 0
@@ -65,29 +73,24 @@ const props = defineProps({
     right: 0
     cursor: pointer
     display: none
+
     &-button
       opacity: 0.8
       border-radius: $default
-  &__info
-    display: flex
-    flex-direction: column
-  &__price
-    display: flex
-    align-items: center
-    font-size: 1.8rem
-    font-weight: 600
-    margin-bottom: 0.5rem
-  &__fullprice
-    margin-left: 1rem
-    text-decoration: line-through
-    color: $gray
+
+.info
+  display: flex
+  flex-direction: column
+
   &__description
     color: $gray
     text-align: left
     margin-bottom: 0.5rem
+
   &__rate
     display: flex
     margin-bottom: 0.5rem
+
   &__credit
     align-self: flex-start
     border-radius: 2rem
@@ -98,21 +101,38 @@ const props = defineProps({
     font-weight: 600
     color: $dark
     margin-bottom: 1rem
-  &__actions
-    display: flex
-    align-items: center
+
+.price
+  display: flex
+  align-items: center
+  font-size: 1.8rem
+  font-weight: 600
+  margin-bottom: 0.5rem
+
+  &__fullprice
+    margin-left: 1rem
+    text-decoration: line-through
+    color: $gray
+
+.actions
+  display: flex
+  align-items: center
+
   &__add-cart-button
     border: 2px solid $purple
     background-color: $purple
     color: $white
+
     &:hover
       border: 2px solid $light-purple
       background-color: $light-purple
+
   &__like-button
     margin-left: 2rem
     width: 3rem
     height: 3rem
     cursor: pointer
+
 
 :deep(.card__like-button) path
   transition: fill .4s ease
