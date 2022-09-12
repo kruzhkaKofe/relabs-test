@@ -88,7 +88,7 @@ const checkPass = (rule, value, callback) => {
   if (value.length < 8) {
     return callback(new Error("Минимум 8 символов"));
   }
-  if (/(?=.*[A-Z])/g.test(value)) {
+  if (/(?=.*[A-ZА-Я])/g.test(value)) {
     callback();
   } else {
     callback(new Error("Минимум 1 большая буква"))
