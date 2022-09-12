@@ -38,9 +38,18 @@
             message: 'Введите пароль',
             trigger: 'blur',
           },
+          {
+            validator: checkPass,
+            trigger: ['blur', 'change'],
+          },
         ]"
       >
-        <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+        <el-input 
+          v-model.trim="ruleForm.pass" 
+          type="password" 
+          autocomplete="off"
+          :show-password="true"
+        />
       </el-form-item>
 
       <el-form-item>
@@ -71,6 +80,20 @@ const ruleForm = ref({
   email: "",
   pass: "",
 });
+
+const checkPass = (rule, value, callback) => {
+  if (!value) {
+    return callback(new Error("Введите пароль"));
+  }
+  if (value.length < 8) {
+    return callback(new Error("Минимум 8 символов"));
+  }
+  if (/(?=.*[A-Z])/g.test(value)) {
+    callback();
+  } else {
+    callback(new Error("Минимум 1 большая буква"))
+  }
+};
 
 const submitForm = (formEl) => {
   if (!formEl) return;
